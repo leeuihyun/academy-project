@@ -3,12 +3,7 @@ import { Form, Input, Checkbox, Button } from "antd";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const taskMap = {
-    login: "login",
-    register: "register",
-};
-
-const AuthFormBlock = styled.div`
+const RegisterFormBlock = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,16 +34,14 @@ const AuthFormBlock = styled.div`
     }
 `;
 
-function AuthForm({ type }) {
-    const text = taskMap[type];
+function RegisterForm() {
     const onSubmitForm = () => {
         console.log("clear");
     };
 
     return (
-        <AuthFormBlock>
+        <RegisterFormBlock>
             <div>ACADEMY</div>
-            <div>{text}</div>
             <div className="auth-box">
                 <Form
                     autoComplete="off"
@@ -88,21 +81,18 @@ function AuthForm({ type }) {
                     >
                         <Input.Password />
                     </Form.Item>
-                    {type === "register" && (
-                        <Form.Item
-                            label="PasswordCheck"
-                            name="passwordCheck"
-                            rules={[
-                                {
-                                    required: true,
-                                    message:
-                                        "Please input your Password Check!",
-                                },
-                            ]}
-                        >
-                            <Input.Password />
-                        </Form.Item>
-                    )}
+                    <Form.Item
+                        label="PasswordCheck"
+                        name="passwordCheck"
+                        rules={[
+                            {
+                                required: true,
+                                message: "Please input your Password Check!",
+                            },
+                        ]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
                     <Form.Item
                         name="remember"
                         valuePropName="checked"
@@ -120,20 +110,16 @@ function AuthForm({ type }) {
                         }}
                     >
                         <Button type="primary" htmlType="submit">
-                            {text}
+                            회원가입
                         </Button>
                     </Form.Item>
                 </Form>
                 <div className="footer">
-                    {type === "login" ? (
-                        <Link to="/register">회원가입</Link>
-                    ) : (
-                        <Link to="/login">로그인</Link>
-                    )}
+                    <Link to="/login">로그인</Link>
                 </div>
             </div>
-        </AuthFormBlock>
+        </RegisterFormBlock>
     );
 }
 
-export default AuthForm;
+export default RegisterForm;
