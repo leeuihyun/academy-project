@@ -1,7 +1,12 @@
 import React from "react";
+import AppLayout from "../components/AppLayout";
 
 function StudentListPage() {
-    return <div>StudentListPage</div>;
+    return (
+        <AppLayout>
+            <div>학생목록페이지</div>
+        </AppLayout>
+    );
 }
 
 export default StudentListPage;
