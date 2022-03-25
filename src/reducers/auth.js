@@ -41,6 +41,7 @@ const auth = handleActions(
             ...state,
             isLoggedIn: false,
             isLoggingIn: true,
+            user: action.payload, //나중에 바꿔야함 테스트하기 위함 (saga 이전)
         }),
         [LOG_IN_SUCCESS]: (state, action) => ({
             ...state,

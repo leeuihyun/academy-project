@@ -1,7 +1,7 @@
 import React from "react";
 
-function Time() {
+function TeacherTime() {
     return <div>Time</div>;
 }
 
-export default Time;
+export default TeacherTime;

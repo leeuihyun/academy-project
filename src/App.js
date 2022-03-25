@@ -6,7 +6,7 @@ import RegisterPage from "./pages/RegisterPage"; //선생님회원가입 페이�
 import StudentListPage from "./pages/StudentListPage"; //학생 목록 페이지
 import StudentRegisterPage from "./pages/StudentRegisterPage"; // 학생 등록 페이지
 import StudentToDoPage from "./pages/StudentToDoPage"; //학생 목록에서 클릭시 학생 무엇을 해야되는지
-import Time from "./pages/Time"; //시간표 페이지
+import TeacherTime from "./pages/TeacherTime"; //시간표 페이지
 import "antd/dist/antd.css";
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
                 component={StudentToDoPage}
             ></Route>
             <Route path="/profile" component={Profile}></Route>
-            <Route path="time" component={Time}></Route>
+            <Route path="/time" component={TeacherTime}></Route>
         </>
     );
 }

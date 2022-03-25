@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Form, Input, Checkbox, Button } from "antd";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { logInRequest } from "../reducers/auth";
+import { useState } from "react";
 
 const LogInFormBlock = styled.div`
     display: flex;
@@ -36,8 +38,23 @@ const LogInFormBlock = styled.div`
 `;
 
 function LogInForm() {
+    const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth);
+
+    const [id, setId] = useState("");
+    const [password, setPassword] = useState("");
+
+    const onChangeId = useCallback((e) => {
+        setId(e.target.value);
+    }, []);
+
+    const onChangePassword = useCallback((e) => {
+        setPassword(e.target.value);
+    }, []);
+
     const onSubmitForm = () => {
-        console.log("clear");
+        dispatch(logInRequest({ id, password }));
+        console.log(user);
     };
 
     return (
@@ -68,7 +85,7 @@ function LogInForm() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input onChange={onChangeId} />
                     </Form.Item>
                     <Form.Item
                         label="Password"
@@ -80,7 +97,7 @@ function LogInForm() {
                             },
                         ]}
                     >
-                        <Input.Password />
+                        <Input.Password onChange={onChangePassword} />
                     </Form.Item>
                     <Form.Item
                         name="remember"
