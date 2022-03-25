@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logInRequest } from "../reducers/auth";
 import { useState } from "react";
+import { withRouter } from "react-router-dom";
+import { useEffect } from "react";
 
 const LogInFormBlock = styled.div`
     display: flex;
@@ -37,9 +39,10 @@ const LogInFormBlock = styled.div`
     }
 `;
 
-function LogInForm() {
+function LogInForm({ history }) {
     const dispatch = useDispatch();
     const { isLoggingIn } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.auth);
 
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -57,6 +60,11 @@ function LogInForm() {
         dispatch(logInRequest({ id, password }));
     }, [dispatch, id, password]);
 
+    useEffect(() => {
+        if (user) {
+            history.push("/");
+        }
+    });
     return (
         <LogInFormBlock>
             <div>ACADEMY</div>
@@ -132,4 +140,4 @@ function LogInForm() {
     );
 }
 
-export default LogInForm;
+export default withRouter(LogInForm);

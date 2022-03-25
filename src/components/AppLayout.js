@@ -36,7 +36,7 @@ const AppLayout = ({ children }) => {
                         <Link to="/studentRegister">학생등록</Link>
                     </Menu.Item>
                     <Menu.Item>
-                        <Link href="/profile">프로필</Link>
+                        <Link to="/profile">프로필</Link>
                     </Menu.Item>
                 </Menu>
                 <Row gutter={8}>
