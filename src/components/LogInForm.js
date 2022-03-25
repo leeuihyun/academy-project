@@ -39,7 +39,7 @@ const LogInFormBlock = styled.div`
 
 function LogInForm() {
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.auth);
+    const { isLoggingIn } = useSelector((state) => state.auth);
 
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -52,10 +52,10 @@ function LogInForm() {
         setPassword(e.target.value);
     }, []);
 
-    const onSubmitForm = () => {
+    const onSubmitForm = useCallback(() => {
+        console.log(id, password);
         dispatch(logInRequest({ id, password }));
-        console.log(user);
-    };
+    }, [dispatch, id, password]);
 
     return (
         <LogInFormBlock>
@@ -115,7 +115,11 @@ function LogInForm() {
                             span: 16,
                         }}
                     >
-                        <Button type="primary" htmlType="submit">
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            loading={isLoggingIn}
+                        >
                             로그인
                         </Button>
                     </Form.Item>
