@@ -1,5 +1,5 @@
 import { createAction, handleActions } from "redux-actions";
-import { all, fork, put, takeLatest, delay } from "redux-saga/effects";
+import { put, takeLatest, delay } from "redux-saga/effects";
 import axios from "axios";
 
 const LOG_IN_REQUEST = "LOG_IN_REQUEST";
@@ -108,7 +108,7 @@ const auth = handleActions(
             ...state,
             isLoggedIn: false,
             isLoggingOut: false,
-            user: action.payload,
+            user: null,
         }),
         [LOG_OUT_FAILURE]: (state) => ({
             ...state,
