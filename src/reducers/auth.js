@@ -71,18 +71,24 @@ const initialState = {
     user: null,
     registerData: {},
     logInData: {},
+};
+
+const dummyUser = (data) => ({
+    ...data, //id,password받아옴
+    nickname: "vanc",
     studentList: [
         {
+            studentId: 1,
             name: "mrlee",
             text: "첫 학생 메모 테스트",
         },
         {
+            studentId: 2,
             name: "mrlee2",
             text: "두번째 학생 메모 테스트",
         },
     ],
-};
-
+});
 const auth = handleActions(
     {
         [LOG_IN_REQUEST]: (state, action) => ({
@@ -94,7 +100,7 @@ const auth = handleActions(
             ...state,
             isLoggedIn: true,
             isLoggingIn: false,
-            user: action.payload,
+            user: dummyUser(action.payload),
         }),
         [LOG_IN_FAILURE]: (state) => ({
             ...state,
