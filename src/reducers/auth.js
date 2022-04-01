@@ -105,13 +105,24 @@ const dummyUser = (data) => ({
     studentList: [
         {
             studentId: 1,
-            name: "mrlee",
+            name: "김형수",
+            age: 28,
             text: "첫 학생 메모 테스트",
+            phoneNumber: "010-1234-5678",
         },
         {
             studentId: 2,
-            name: "mrlee2",
+            name: "이재우",
+            age: 26,
             text: "두번째 학생 메모 테스트",
+            phoneNumber: "010-1234-5678",
+        },
+        {
+            studentId: 3,
+            name: "임종태",
+            age: 26,
+            text: "세번째 학생 메모 테스트",
+            phoneNumber: "010-1234-5678",
         },
     ],
 });

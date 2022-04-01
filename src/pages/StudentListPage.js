@@ -1,10 +1,11 @@
 import React from "react";
 import AppLayout from "../components/AppLayout";
+import StudentListForm from "../components/StudentListForm";
 
 function StudentListPage() {
     return (
         <AppLayout>
-            <div>학생목록페이지</div>
+            <StudentListForm></StudentListForm>
         </AppLayout>
     );
 }
