@@ -1,7 +1,10 @@
 import React from "react";
 import AppLayout from "../components/AppLayout";
+import { useSelector } from "react-redux";
+
 function StudentRegisterPage() {
-    return <AppLayout>학생등록페이지</AppLayout>;
+    const { user } = useSelector((state) => state.auth);
+    return <AppLayout>{user.nickname}</AppLayout>;
 }
 
 export default StudentRegisterPage;

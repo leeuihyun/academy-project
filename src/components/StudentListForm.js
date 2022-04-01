@@ -3,6 +3,7 @@ import { Table, Space, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const columns = [
     {
@@ -24,10 +25,15 @@ const columns = [
     {
         title: "Action",
         key: "action",
+        align: "right",
         render: (text, record) => (
             <Space size="middle">
-                <Button onClick={() => console.log("edit button click")}>
-                    Edit
+                <Button
+                    onClick={() => {
+                        console.log("edit button click");
+                    }}
+                >
+                    <Link to="/studentregister">Edit</Link>
                 </Button>
                 <Button onClick={() => console.log("delete button click")}>
                     Delete
