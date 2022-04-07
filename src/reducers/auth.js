@@ -1,6 +1,8 @@
 import { createAction, handleActions } from "redux-actions";
-import { put, takeLatest, delay } from "redux-saga/effects";
+import { put, takeLatest, delay, call } from "redux-saga/effects";
+import shortId from "shortid";
 import axios from "axios";
+import produce from "immer";
 
 export const LOG_IN_REQUEST = "LOG_IN_REQUEST";
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
@@ -14,6 +16,14 @@ export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 
+export const STUDENT_REGISTER_REQUEST = "STUDENT_REGISTER_REQUEST";
+export const STUDENT_REGISTER_SUCCESS = "STUDENT_REGISTER_SUCCESS";
+export const STUDENT_REGISTER_FAILURE = "STUDENT_REGISTER_FAILURE";
+
+export const STUDENT_CHANGE_REQUEST = "STUDENT_CHANGE_REQUEST";
+export const STUDENT_CHANGE_SUCCESS = "STUDENT_CHANGE_SUCCESS";
+export const STUDENT_CHANGE_FAILURE = "STUDENT_CHANGE_FAILURE";
+
 export const logInRequest = createAction(LOG_IN_REQUEST, (data) => data);
 export const logOutRequest = createAction(LOG_OUT_REQUEST);
 export const registerRequest = createAction(REGISTER_REQUEST, (data) => data);
@@ -25,6 +35,9 @@ const initialState = {
     registerLoading: false,
     registerDone: false,
     registerError: null,
+    studentRegisterLoading: false,
+    studentRegisterDone: false,
+    studentRegisterError: null,
     logOutLoading: false,
     logOutDone: false,
     logOutError: null,
@@ -41,6 +54,9 @@ function logOutApi(data) {
 }
 function registerApi(data) {
     return axios.post("register/api", data);
+}
+function studentRegisterApi(data) {
+    return axios.post("/studentregister", data);
 }
 function* logIn(action) {
     try {
@@ -92,10 +108,27 @@ function* register(action) {
         });
     }
 }
+function* studentRegister(action) {
+    try {
+        yield delay(1000);
+        //const res = yield call(studentRegisterApi, action.data);
+        yield put({
+            type: STUDENT_REGISTER_SUCCESS,
+            data: action.data,
+        });
+    } catch (error) {
+        console.error(error);
+        yield put({
+            type: STUDENT_REGISTER_FAILURE,
+            error: error.response.data,
+        });
+    }
+}
 export function* authSaga() {
     yield takeLatest(LOG_IN_REQUEST, logIn);
     yield takeLatest(LOG_OUT_REQUEST, logOut);
     yield takeLatest(REGISTER_REQUEST, register);
+    yield takeLatest(STUDENT_REGISTER_REQUEST, studentRegister);
 }
 //
 
@@ -104,21 +137,21 @@ const dummyUser = (data) => ({
     nickname: "vanc",
     studentList: [
         {
-            studentId: 1,
+            studentId: shortId.generate(),
             name: "김형수",
             age: 28,
             text: "첫 학생 메모 테스트",
             phoneNumber: "010-1234-5678",
         },
         {
-            studentId: 2,
+            studentId: shortId.generate(),
             name: "이재우",
             age: 26,
             text: "두번째 학생 메모 테스트",
             phoneNumber: "010-1234-5678",
         },
         {
-            studentId: 3,
+            studentId: shortId.generate(),
             name: "임종태",
             age: 26,
             text: "세번째 학생 메모 테스트",
@@ -179,6 +212,29 @@ const auth = handleActions(
             registerError: action.error,
             registerLoading: false,
         }),
+        [STUDENT_REGISTER_REQUEST]: (state, action) =>
+            produce(state, (draft) => {
+                draft.studentRegisterLoading = true;
+                draft.studentRegisterDone = false;
+                draft.studentRegisterError = null;
+            }),
+        [STUDENT_REGISTER_SUCCESS]: (state, action) =>
+            produce(state, (draft) => {
+                draft.user.studentList.push({
+                    id: shortId.generate(),
+                    name: action.data.name,
+                    age: action.data.age,
+                    text: action.data.text,
+                    phoneNumber: action.data.phoneNumber,
+                });
+                draft.studentRegisterLoading = false;
+                draft.studentRegisterDone = true;
+            }),
+        [STUDENT_REGISTER_FAILURE]: (state, action) =>
+            produce(state, (draft) => {
+                draft.studentRegisterLoading = false;
+                draft.studentRegisterError = action.data.error;
+            }),
     },
     initialState
 );
