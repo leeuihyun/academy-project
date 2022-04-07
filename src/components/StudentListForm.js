@@ -7,36 +7,36 @@ import { Link } from "react-router-dom";
 
 const columns = [
     {
-        title: "Name",
+        title: "이름",
         dataIndex: "name",
         key: "name",
         render: (text) => <a>{text}</a>,
     },
     {
-        title: "Age",
+        title: "나이",
         dataIndex: "age",
         key: "age",
     },
     {
-        title: "PhoneNumber",
+        title: "핸드폰",
         dataIndex: "phoneNumber",
         key: "phoneNumber",
     },
     {
-        title: "Action",
+        title: "액션",
         key: "action",
         align: "right",
         render: (text, record) => (
             <Space size="middle">
                 <Button
-                    onClick={() => {
-                        console.log("edit button click");
+                    onClick={(e) => {
+                        console.log(record.studentId);
                     }}
                 >
-                    <Link to="/studentregister">Edit</Link>
+                    <Link to={`/studentchange/${record.studentId}`}>수정</Link>
                 </Button>
                 <Button onClick={() => console.log("delete button click")}>
-                    Delete
+                    삭제
                 </Button>
             </Space>
         ),
