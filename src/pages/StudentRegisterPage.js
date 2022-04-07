@@ -1,10 +1,13 @@
 import React from "react";
 import AppLayout from "../components/AppLayout";
-import { useSelector } from "react-redux";
+import StudentRegisterForm from "../components/StudentRegisterForm";
 
 function StudentRegisterPage() {
-    const { user } = useSelector((state) => state.auth);
-    return <AppLayout>{user.nickname}</AppLayout>;
+    return (
+        <AppLayout>
+            <StudentRegisterForm />
+        </AppLayout>
+    );
 }
 
 export default StudentRegisterPage;
