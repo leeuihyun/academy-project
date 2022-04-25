@@ -1,0 +1,5 @@
+next.config.js
+.eslintrc
+.babelrc
+node_moduels
+package-lock.json
