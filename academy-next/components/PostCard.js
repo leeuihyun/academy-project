@@ -1,5 +1,7 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import MyModal from "./MyModal";
 
 const Box = styled.div`
     border-radius: 10px;
@@ -15,15 +17,19 @@ const Box = styled.div`
 `;
 
 function PostCard({ data }) {
-    const onClickBox = useCallback(() => {
-        console.log("onClick");
-    });
+    const [isOpen, setIsOpen] = useState(false);
+
+    const onClickBox = () => {
+        setIsOpen(true);
+        console.log(data.id);
+    };
     return (
         <>
             <Box onClick={onClickBox}>
                 <div className="name_area">{data.name}</div>
                 <div className="infor">{data.school}</div>
             </Box>
+            <MyModal isOpen={isOpen} setIsOpen={setIsOpen} />
         </>
     );
 }
