@@ -21,7 +21,7 @@ function PostCard({ data }) {
 
     const onClickBox = () => {
         setIsOpen(true);
-        console.log(data.id);
+        console.log(data);
     };
     return (
         <>
@@ -29,7 +29,7 @@ function PostCard({ data }) {
                 <div className="name_area">{data.name}</div>
                 <div className="infor">{data.school}</div>
             </Box>
-            <MyModal isOpen={isOpen} setIsOpen={setIsOpen} />
+            <MyModal isOpen={isOpen} setIsOpen={setIsOpen} data={data} />
         </>
     );
 }
