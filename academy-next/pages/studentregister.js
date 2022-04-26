@@ -9,7 +9,7 @@ import Router from "next/router";
 const Box = styled.form`
     border-radius: 10px;
     width: 100%;
-    height: 360px;
+    height: 400px;
     box-shadow: 0px 0px 3px #053946;
     padding: 20px;
     margin-top: 20px;
@@ -98,11 +98,12 @@ function studentregister() {
                 </div>
                 <div>
                     <label htmlFor="content">Content</label>
-                    <Input
+                    <Input.TextArea
+                        rows={4}
                         name="content"
                         value={content}
                         onChange={onChangeContent}
-                    ></Input>
+                    />
                 </div>
                 <div>
                     <label htmlFor="achieve">Achieve</label>
