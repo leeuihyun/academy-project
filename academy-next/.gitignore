@@ -3,3 +3,8 @@ next.config.js
 .babelrc
 node_moduels
 package-lock.json
+.next
+.next/server
+.next/static
+.next/build-manifest.json
+
