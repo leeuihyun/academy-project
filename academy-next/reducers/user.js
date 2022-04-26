@@ -72,6 +72,15 @@ const dummyStudent = (data) => ({
     school: data.student.school,
 });
 
+const changeStudent = (data) => ({
+    id: data.student.id,
+    name: data.student.name,
+    content: data.student.content,
+    phone: data.student.phone,
+    achievementRate: data.student.achievementRate,
+    school: data.student.school,
+});
+
 const user = handleActions(
     {
         [LOG_IN_REQUEST]: (state, action) =>
@@ -151,16 +160,13 @@ const user = handleActions(
         [CHANGE_STUDENT_SUCCESS]: (state, action) =>
             produce(state, (draft) => {
                 const student = draft.user.studentList.find(
-                    (v) => v.id === action.data.id
+                    (v) => v.id === action.data.student.id
                 );
-                student = {
-                    ...id,
-                    name: action.data.student.name,
-                    content: action.data.student.content,
-                    phone: action.data.student.phone,
-                    achievementRate: action.data.student.achievementRate,
-                    school: action.data.student.school,
-                };
+                student.name = action.data.student.name;
+                student.school = action.data.student.school;
+                student.achievementRate = action.data.student.achieve;
+                student.phone = action.data.student.phone;
+                student.content = action.data.student.content;
                 draft.changeStudentLoading = false;
                 draft.changeStudentDone = true;
             }),
