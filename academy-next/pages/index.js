@@ -1,6 +1,7 @@
 import React from "react";
 import AppLayout from "../components/AppLayout";
 import PostCard from "../components/PostCard";
+import { useSelector } from "react-redux";
 
 const mainPosts = [
     {
@@ -35,11 +36,14 @@ const mainPosts = [
     },
 ];
 function index() {
+    const { user } = useSelector((state) => state.user);
+
     return (
         <AppLayout>
-            {mainPosts.map((v) => (
-                <PostCard></PostCard>
-            ))}
+            {user &&
+                user.studentList.map((v) => (
+                    <PostCard data={v} key={v}></PostCard>
+                ))}
         </AppLayout>
     );
 }
