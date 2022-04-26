@@ -14,15 +14,15 @@ const Box = styled.div`
     margin-top: 20px;
 `;
 
-function PostCard() {
+function PostCard({ data }) {
     const onClickBox = useCallback(() => {
         console.log("onClick");
     });
     return (
         <>
             <Box onClick={onClickBox}>
-                <div className="name_area">name_area</div>
-                <div className="infor">infor</div>
+                <div className="name_area">{data.name}</div>
+                <div className="infor">{data.school}</div>
             </Box>
         </>
     );
