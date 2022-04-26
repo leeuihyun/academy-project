@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { ADD_STUDENT_REQUEST } from "../reducers/user";
+import Router from "next/router";
 
 const Box = styled.form`
     border-radius: 10px;
@@ -44,6 +45,11 @@ function studentregister() {
     const onChangeContent = useCallback((e) => {
         setContent(e.target.value);
     }, []);
+    useEffect(() => {
+        if (!user) {
+            Router.push("/");
+        }
+    }, [user]);
 
     const onSubmit = useCallback(
         (e) => {
